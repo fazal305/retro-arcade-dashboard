@@ -1,94 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A neon retro arcade dashboard with coin tracking, generated game scores, local saves, and a live scoreboard."
+    />
 
-  <title>Retro Arcade Dashboard</title>
+    <title>Retro Arcade Dashboard</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="arcade-styles.css" />
+  </head>
+  <body>
+    <div class="scanlines" aria-hidden="true"></div>
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <header class="top-marquee" aria-label="Arcade status marquee">
+      <p id="marqueeText" class="marquee-track">
+        INSERT COIN / PRESS START / HIGH SCORE: 00000 /
+      </p>
+    </header>
 
-  <link rel="stylesheet" href="arcade-styles.css">
-</head>
-<body>
-
-  <div class="scanlines"></div>
-
-  <header class="top-marquee">
-    <div class="marquee-track">
-      <span id="marqueeText">
-        INSERT COIN · PRESS START · HIGH SCORE: 00000 ·
-      </span>
-    </div>
-  </header>
-
-  <main class="dashboard-container">
-
-    <section class="hero-section">
-
-      <div>
-        <p class="system-status">ARCADE SYSTEM ONLINE</p>
-
-        <h1 class="main-title">
-          Retro Arcade Dashboard
-        </h1>
-
-        <p class="hero-description">
-          Neon machines. Fake high scores. Pure retro chaos.
-        </p>
-      </div>
-
-      <div class="coin-panel">
-
-        <div class="coin-header">
-          <span>🪙 COINS</span>
-          <strong id="coinCount">3</strong>
+    <main class="dashboard-container">
+      <section class="hero-section" aria-labelledby="pageTitle">
+        <div class="hero-copy">
+          <p class="system-status">ARCADE SYSTEM ONLINE</p>
+          <h1 id="pageTitle" class="main-title">Retro Arcade Dashboard</h1>
+          <p class="hero-description">
+            Pick a cabinet, spend a coin, and chase the top score in a neon mini
+            arcade.
+          </p>
         </div>
 
-        <p id="coinMessage"></p>
-
-        <button id="addCoinsBtn" class="add-coins-btn">
-          Add Coins
-        </button>
-
-      </div>
-
-    </section>
-
-    <section class="main-layout">
-
-      <div class="game-section">
-
-        <div class="section-heading">
-          <h2>Game Machines</h2>
-        </div>
-
-        <div id="gameGrid" class="game-grid"></div>
-
-      </div>
-
-      <aside class="scoreboard-panel">
-
-        <div class="scoreboard-header">
-          <h2>Top Scores</h2>
-
-          <button id="resetScoresBtn" class="reset-btn">
-            Reset
+        <aside class="coin-panel" aria-label="Coin counter">
+          <div class="coin-header">
+            <span>COINS</span>
+            <strong id="coinCount">3</strong>
+          </div>
+          <p id="coinMessage" aria-live="polite"></p>
+          <button id="addCoinsBtn" class="add-coins-btn" type="button">
+            Add Coins
           </button>
-        </div>
+        </aside>
+      </section>
 
-        <ol id="scoreboardList" class="scoreboard-list"></ol>
+      <section class="main-layout">
+        <section class="game-section" aria-labelledby="machinesTitle">
+          <div class="section-heading">
+            <h2 id="machinesTitle">Game Machines</h2>
+            <p>
+              Each launch creates a short loading sequence and saves the result
+              locally.
+            </p>
+          </div>
 
-      </aside>
+          <div id="gameGrid" class="game-grid"></div>
+        </section>
 
-    </section>
+        <aside class="scoreboard-panel" aria-labelledby="scoreboardTitle">
+          <div class="scoreboard-header">
+            <h2 id="scoreboardTitle">Top Scores</h2>
+            <button id="resetScoresBtn" class="reset-btn" type="button">
+              Reset
+            </button>
+          </div>
 
-  </main>
+          <ol
+            id="scoreboardList"
+            class="scoreboard-list"
+            aria-live="polite"
+          ></ol>
+        </aside>
+      </section>
+    </main>
 
-  <script src="arcade-script.js"></script>
-
-</body>
+    <script src="arcade-script.js"></script>
+  </body>
 </html>

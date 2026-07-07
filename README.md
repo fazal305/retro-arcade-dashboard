@@ -1,119 +1,77 @@
-# 🎮 Retro Arcade Dashboard
+# Retro Arcade Dashboard
 
-A neon-styled retro arcade launcher built with HTML, CSS, and vanilla JavaScript.
+A neon arcade control panel built with HTML, CSS, and vanilla JavaScript.
 
-This project recreates the feeling of an 80s arcade cabinet UI with glowing game cards, fake loading systems, live scoreboards, retro sound effects, localStorage saves, and animated neon visuals.
+Retro Arcade Dashboard turns a simple browser page into a playful arcade launcher with animated game machines, coin tracking, generated scores, local saves, and a live top-score board. It is designed as a front-end practice project with a clear visual theme and interactive state management.
 
----
-
-## 🚀 Live Demo
+## Live Demo
 
 https://fazal305.github.io/retro-arcade-dashboard/
 
----
+## Preview
 
-## 📸 Screenshot
+![Retro Arcade Dashboard screenshot](image.png)
 
-### Arcade Dashboard
-![alt text](image.png)
+## Features
 
+- Responsive arcade dashboard layout
+- Eight fictional game machine cards
+- Coin-based play flow with refill support
+- Animated loading bars for each game launch
+- Random score generation after every session
+- Top-five scoreboard sorted by score
+- Per-game high score tracking
+- Local browser save using `localStorage`
+- Retro beep effects using the Web Audio API
+- Mobile vibration feedback where supported
+- Reset button for clearing saved arcade data
+- Reduced-motion support for users who prefer calmer animation
 
----
-
-## ✨ Features
-
-- 🎮 8 fake retro arcade game cards
-- 🌈 Unique neon glow theme for every machine
-- ⚡ Animated loading bars
-- 🏆 Live top 5 scoreboard system
-- 💾 localStorage save system
-- 🔊 Retro sound effects using Web Audio API
-- 📳 Mobile vibration feedback
-- 🪙 Coin system with refill button
-- 📺 Scrolling arcade marquee
-- 📱 Fully responsive layout
-- ✨ Hover glow animations and flicker effects
-- 🔥 Reset scoreboard system
-
----
-
-## 🕹️ Included Arcade Games
-
-| Game | Genre |
-|---|---|
-| VOID RUNNER | SHOOTER |
-| PIXEL SLAYER | FIGHTER |
-| BLOCK BUSTER 99 | PUZZLE |
-| GHOST HIGHWAY | RACER |
-| NEON STRIKER | SPORTS |
-| LASER DUNGEON | RPG |
-| TURBO FIST | FIGHTER |
-| STAR WRAITH | SHOOTER |
-
----
-
-## ⌨️ Keyboard Controls
-
-| Key | Action |
-|---|---|
-| Click PLAY | Launch game |
-| Add Coins Button | Refill coins |
-| Reset Button | Clear all saved scores |
-
----
-
-## 🧠 What I Learned
-
-This project helped me practice:
-
-- DOM rendering
-- Dynamic UI generation
-- CSS Grid layouts
-- CSS glow effects
-- JavaScript arrays and sorting
-- localStorage persistence
-- Responsive design
-- Audio APIs
-- State management
-- CSS animations and keyframes
-
----
-
-## 🛠️ Built With
+## Tech Stack
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Google Fonts
 - Web Audio API
 - localStorage API
+- Google Fonts
 
----
+## Project Structure
 
-## 📂 Project Structure
-
-```bash
+```text
 retro-arcade-dashboard/
-│
-├── index.html
-├── arcade-styles.css
-├── arcade-script.js
-│
-├── screenshot/
-│   ├── image.png
-│   
-│
-└── README.md
----
+|-- index.html
+|-- arcade-styles.css
+|-- arcade-script.js
+|-- image.png
+|-- LICENSE
+`-- README.md
+```
 
-## 👨‍💻 Developer
+## What I Practiced
 
-Built by Fazal Abbas
+- Rendering UI from JavaScript data
+- Managing browser state without a framework
+- Sorting and limiting scoreboard records
+- Saving and restoring data with `localStorage`
+- Building responsive card grids
+- Creating neon effects with CSS variables
+- Handling buttons, disabled states, and feedback messages
+- Adding small accessibility improvements with semantic HTML and live regions
 
-GitHub:
-https://github.com/fazal305
+## Run Locally
 
-LinkedIn:
-https://www.linkedin.com/in/fazal-abbas-4653dg86
+Open `index.html` in a browser.
 
----
+No build step or package installation is required.
+
+## Author
+
+Built by Fazal Abbas.
+
+- GitHub: https://github.com/fazal305
+- LinkedIn: https://www.linkedin.com/in/fazal-abbas-4653dg86
+
+## License
+
+This project is licensed under the MIT License.
