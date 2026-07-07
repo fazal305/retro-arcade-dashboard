@@ -6,54 +6,47 @@ const addCoinsBtn = document.getElementById("addCoinsBtn");
 const marqueeText = document.getElementById("marqueeText");
 const resetScoresBtn = document.getElementById("resetScoresBtn");
 
+const storageKey = "retroArcadeData";
+const maxScores = 5;
 let coins = 3;
 let scoreboard = [];
+let audioContext = null;
 
 const gameList = [
-  { id: "game1", title: "VOID RUNNER", genre: "SHOOTER", color: "#00f7ff", highScore: 0, pixelIcon: "🚀" },
-  { id: "game2", title: "PIXEL SLAYER", genre: "FIGHTER", color: "#ff2bd6", highScore: 0, pixelIcon: "🗡️" },
-  { id: "game3", title: "BLOCK BUSTER 99", genre: "PUZZLE", color: "#ffe600", highScore: 0, pixelIcon: "🧱" },
-  { id: "game4", title: "GHOST HIGHWAY", genre: "RACER", color: "#ff8c00", highScore: 0, pixelIcon: "🏎️" },
-  { id: "game5", title: "NEON STRIKER", genre: "SPORTS", color: "#00ff88", highScore: 0, pixelIcon: "⚽" },
-  { id: "game6", title: "LASER DUNGEON", genre: "RPG", color: "#9b5cff", highScore: 0, pixelIcon: "🧙" },
-  { id: "game7", title: "TURBO FIST", genre: "FIGHTER", color: "#ff1f4f", highScore: 0, pixelIcon: "🥊" },
-  { id: "game8", title: "STAR WRAITH", genre: "SHOOTER", color: "#2979ff", highScore: 0, pixelIcon: "👾" }
+  { id: "void-runner", title: "VOID RUNNER", genre: "SHOOTER", color: "#00f7ff", highScore: 0, icon: "VR" },
+  { id: "pixel-duel", title: "PIXEL DUEL", genre: "FIGHTER", color: "#ff2bd6", highScore: 0, icon: "PD" },
+  { id: "block-99", title: "BLOCK BUSTER 99", genre: "PUZZLE", color: "#ffe600", highScore: 0, icon: "B9" },
+  { id: "neon-highway", title: "NEON HIGHWAY", genre: "RACER", color: "#ff8c00", highScore: 0, icon: "NH" },
+  { id: "neon-striker", title: "NEON STRIKER", genre: "SPORTS", color: "#00ff88", highScore: 0, icon: "NS" },
+  { id: "laser-quest", title: "LASER QUEST", genre: "RPG", color: "#9b5cff", highScore: 0, icon: "LQ" },
+  { id: "turbo-fist", title: "TURBO FIST", genre: "FIGHTER", color: "#ff1f4f", highScore: 0, icon: "TF" },
+  { id: "star-drifter", title: "STAR DRIFTER", genre: "SHOOTER", color: "#2979ff", highScore: 0, icon: "SD" }
 ];
 
-// This builds all arcade game cards from the array.
 function renderGameGrid() {
   gameGrid.innerHTML = "";
 
   gameList.forEach(function (game) {
     const gameCard = document.createElement("article");
-
     gameCard.className = "game-card";
     gameCard.dataset.gameId = game.id;
     gameCard.style.setProperty("--accent", game.color);
 
     gameCard.innerHTML = `
-      <div class="pixel-icon">${game.pixelIcon}</div>
-
+      <div class="pixel-icon" aria-hidden="true">${game.icon}</div>
       <h3 class="game-title">${game.title}</h3>
-
       <span class="genre-tag">${game.genre}</span>
-
       <p class="high-score">
         High Score:
-        <span data-score-id="${game.id}">
-          ${game.highScore}
-        </span>
+        <span data-score-id="${game.id}">${formatScore(game.highScore)}</span>
       </p>
-
-      <button class="play-btn" onclick="launchGame('${game.id}')">
+      <button class="play-btn" type="button" data-play-id="${game.id}">
         Play
       </button>
-
-      <div class="loading-shell">
+      <div class="loading-shell" aria-hidden="true">
         <div class="loading-fill"></div>
       </div>
-
-      <p class="game-status"></p>
+      <p class="game-status" aria-live="polite"></p>
     `;
 
     gameGrid.appendChild(gameCard);
@@ -62,7 +55,6 @@ function renderGameGrid() {
   updateCoinDisplay();
 }
 
-// This launches a fake game session and generates a random score.
 function launchGame(gameId) {
   if (coins <= 0) {
     playErrorSound();
@@ -74,13 +66,11 @@ function launchGame(gameId) {
   const selectedGame = gameList.find(function (game) {
     return game.id === gameId;
   });
-
   const selectedCard = document.querySelector(`[data-game-id="${gameId}"]`);
   const playButton = selectedCard.querySelector(".play-btn");
   const statusText = selectedCard.querySelector(".game-status");
 
-  coins--;
-
+  coins -= 1;
   saveArcadeData();
   updateCoinDisplay();
 
@@ -88,107 +78,89 @@ function launchGame(gameId) {
   vibrateDevice(40);
 
   playButton.disabled = true;
-  statusText.textContent = "LOADING...";
+  statusText.textContent = "Loading machine...";
+  statusText.classList.remove("game-over");
 
   fakeLoadingBar(selectedCard, function () {
-    const randomScore = Math.floor(Math.random() * 99000) + 1000;
+    const score = Math.floor(Math.random() * 99000) + 1000;
     const playerInitials = getRandomInitials();
 
     playGameOverSound();
     vibrateDevice([80, 40, 80]);
 
-    statusText.textContent = "GAME OVER — INSERT COIN";
+    statusText.textContent = `Run finished: ${formatScore(score)} points`;
     statusText.classList.add("game-over");
 
-    addScore(playerInitials, selectedGame.title, randomScore);
-    updateHighScore(gameId, randomScore);
+    addScore(playerInitials, selectedGame.title, score);
+    updateHighScore(gameId, score);
 
-    setTimeout(function () {
+    window.setTimeout(function () {
       statusText.classList.remove("game-over");
-
-      if (coins > 0) {
-        playButton.disabled = false;
-      }
+      playButton.disabled = coins <= 0;
     }, 900);
   });
 }
 
-// This animates the fake loading bar.
 function fakeLoadingBar(cardElement, callback) {
   const loadingFill = cardElement.querySelector(".loading-fill");
   let progress = 0;
 
   loadingFill.style.width = "0%";
 
-  const loadingTimer = setInterval(function () {
+  const loadingTimer = window.setInterval(function () {
     progress += 5;
     loadingFill.style.width = `${progress}%`;
 
     if (progress >= 100) {
-      clearInterval(loadingTimer);
+      window.clearInterval(loadingTimer);
       callback();
 
-      setTimeout(function () {
+      window.setTimeout(function () {
         loadingFill.style.width = "0%";
       }, 700);
     }
-  }, 80);
+  }, 70);
 }
 
-// This adds a score and keeps only the top 5.
 function addScore(playerInitials, gameName, score) {
-  scoreboard.push({
-    playerInitials: playerInitials,
-    gameName: gameName,
-    score: score
-  });
-
+  scoreboard.push({ playerInitials, gameName, score });
   scoreboard.sort(function (firstScore, secondScore) {
     return secondScore.score - firstScore.score;
   });
-
-  scoreboard = scoreboard.slice(0, 5);
+  scoreboard = scoreboard.slice(0, maxScores);
 
   saveArcadeData();
   renderScoreboard();
   updateMarquee();
 }
 
-// This rebuilds the live scoreboard.
 function renderScoreboard() {
   scoreboardList.innerHTML = "";
 
   if (scoreboard.length === 0) {
-    scoreboardList.innerHTML = `
-      <li class="empty-score">
-        No scores yet. Play a game.
-      </li>
-    `;
-
+    const emptyItem = document.createElement("li");
+    emptyItem.className = "empty-score";
+    emptyItem.textContent = "No scores yet. Play a machine.";
+    scoreboardList.appendChild(emptyItem);
     return;
   }
 
   scoreboard.forEach(function (scoreEntry, index) {
     const scoreItem = document.createElement("li");
-
     scoreItem.className = "score-entry";
-
     scoreItem.innerHTML = `
       <strong>#${index + 1}</strong>
-
       <div>
         <p>${scoreEntry.playerInitials}</p>
         <span>${scoreEntry.gameName}</span>
       </div>
-
-      <strong>${scoreEntry.score}</strong>
+      <strong>${formatScore(scoreEntry.score)}</strong>
     `;
 
     scoreboardList.appendChild(scoreItem);
   });
 }
 
-// This updates the high score for a game if needed.
 function updateHighScore(gameId, score) {
   const selectedGame = gameList.find(function (game) {
     return game.id === gameId;
@@ -196,64 +168,45 @@ function updateHighScore(gameId, score) {
 
   if (score > selectedGame.highScore) {
     selectedGame.highScore = score;
-
-    const highScoreText = document.querySelector(`[data-score-id="${gameId}"]`);
-
-    highScoreText.textContent = selectedGame.highScore;
-
+    document.querySelector(`[data-score-id="${gameId}"]`).textContent = formatScore(score);
     saveArcadeData();
   }
 }
 
-// This updates the coin display and handles empty coins state.
 function updateCoinDisplay() {
   coinCount.textContent = coins;
-
   coinCount.classList.remove("coin-pulse");
   void coinCount.offsetWidth;
   coinCount.classList.add("coin-pulse");
 
-  const playButtons = document.querySelectorAll(".play-btn");
-
-  playButtons.forEach(function (button) {
+  document.querySelectorAll(".play-btn").forEach(function (button) {
     button.disabled = coins <= 0;
   });
 
   if (coins <= 0) {
-    coinMessage.textContent = "No coins left!";
-    addCoinsBtn.style.display = "inline-block";
+    coinMessage.textContent = "No coins left.";
+    addCoinsBtn.hidden = false;
   } else {
     coinMessage.textContent = "";
-    addCoinsBtn.style.display = "none";
+    addCoinsBtn.hidden = true;
   }
 }
 
-// This updates the scrolling marquee text.
 function updateMarquee() {
-  const topScore = scoreboard.length > 0
-    ? scoreboard[0].score
-    : "00000";
-
-  marqueeText.textContent = `
-    INSERT COIN · PRESS START · HIGH SCORE: ${topScore} ·
-    INSERT COIN · PRESS START · HIGH SCORE: ${topScore} ·
-  `;
+  const topScore = scoreboard.length > 0 ? formatScore(scoreboard[0].score) : "00000";
+  marqueeText.textContent = `INSERT COIN / PRESS START / HIGH SCORE: ${topScore} / INSERT COIN / PRESS START / HIGH SCORE: ${topScore} /`;
 }
 
-// This resets coins back to 3.
 function addCoins() {
   coins = 3;
-
   saveArcadeData();
   playCoinSound();
   vibrateDevice(60);
   updateCoinDisplay();
 }
 
-// This clears all saved scores and resets the arcade.
 function resetArcade() {
-  localStorage.removeItem("retroArcadeData");
-
+  localStorage.removeItem(storageKey);
   coins = 3;
   scoreboard = [];
 
@@ -263,141 +216,135 @@ function resetArcade() {
 
   playResetSound();
   vibrateDevice([60, 40, 60]);
-
   renderGameGrid();
   renderScoreboard();
-  updateCoinDisplay();
   updateMarquee();
 }
 
-// This saves arcade progress into localStorage.
 function saveArcadeData() {
-  const savedGameScores = gameList.map(function (game) {
+  const gameScores = gameList.map(function (game) {
     return {
       id: game.id,
       highScore: game.highScore
     };
   });
 
-  const arcadeData = {
-    coins: coins,
-    scoreboard: scoreboard,
-    gameScores: savedGameScores
-  };
-
-  localStorage.setItem(
-    "retroArcadeData",
-    JSON.stringify(arcadeData)
-  );
+  localStorage.setItem(storageKey, JSON.stringify({ coins, scoreboard, gameScores }));
 }
 
-// This loads saved arcade progress on page refresh.
 function loadArcadeData() {
-  const savedData = localStorage.getItem("retroArcadeData");
+  const savedData = localStorage.getItem(storageKey);
 
   if (!savedData) {
     return;
   }
 
-  const arcadeData = JSON.parse(savedData);
+  try {
+    const arcadeData = JSON.parse(savedData);
+    coins = Number.isInteger(arcadeData.coins) ? arcadeData.coins : 3;
+    scoreboard = Array.isArray(arcadeData.scoreboard) ? arcadeData.scoreboard.slice(0, maxScores) : [];
 
-  coins = arcadeData.coins ?? 3;
-  scoreboard = arcadeData.scoreboard ?? [];
+    if (Array.isArray(arcadeData.gameScores)) {
+      arcadeData.gameScores.forEach(function (savedGame) {
+        const matchingGame = gameList.find(function (game) {
+          return game.id === savedGame.id;
+        });
 
-  if (arcadeData.gameScores) {
-    arcadeData.gameScores.forEach(function (savedGame) {
-      const matchingGame = gameList.find(function (game) {
-        return game.id === savedGame.id;
+        if (matchingGame && Number.isInteger(savedGame.highScore)) {
+          matchingGame.highScore = savedGame.highScore;
+        }
       });
-
-      if (matchingGame) {
-        matchingGame.highScore = savedGame.highScore;
-      }
-    });
+    }
+  } catch (error) {
+    localStorage.removeItem(storageKey);
   }
 }
 
-// This generates random fake player initials.
 function getRandomInitials() {
-  const initials = [
-    "FAZ",
-    "CPU",
-    "NPC",
-    "RDX",
-    "LOL",
-    "AAA",
-    "KHI",
-    "DEV"
-  ];
-
-  const randomIndex = Math.floor(
-    Math.random() * initials.length
-  );
-
-  return initials[randomIndex];
+  const initials = ["FAZ", "CPU", "NPC", "RDX", "LOL", "AAA", "KHI", "DEV"];
+  return initials[Math.floor(Math.random() * initials.length)];
 }
 
-// This creates a short retro beep sound.
+function formatScore(score) {
+  return String(score).padStart(5, "0");
+}
+
+function getAudioContext() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContext) {
+    return null;
+  }
+
+  if (!audioContext) {
+    audioContext = new AudioContext();
+  }
+
+  return audioContext;
+}
+
 function playBeepSound(frequency, duration, type) {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
+  const context = getAudioContext();
+
+  if (!context) {
+    return;
+  }
+
+  const oscillator = context.createOscillator();
+  const gainNode = context.createGain();
 
   oscillator.type = type;
   oscillator.frequency.value = frequency;
-
-  gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(
-    0.001,
-    audioContext.currentTime + duration
-  );
+  gainNode.gain.setValueAtTime(0.08, context.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration);
 
   oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-
+  gainNode.connect(context.destination);
   oscillator.start();
-  oscillator.stop(audioContext.currentTime + duration);
+  oscillator.stop(context.currentTime + duration);
 }
 
-// This plays when a game starts.
 function playStartSound() {
   playBeepSound(520, 0.12, "square");
 }
 
-// This plays when a game ends.
 function playGameOverSound() {
   playBeepSound(180, 0.25, "sawtooth");
 }
 
-// This plays when coins are added.
 function playCoinSound() {
   playBeepSound(760, 0.12, "triangle");
 
-  setTimeout(function () {
+  window.setTimeout(function () {
     playBeepSound(980, 0.1, "triangle");
   }, 90);
 }
 
-// This plays when the player has no coins.
 function playErrorSound() {
   playBeepSound(120, 0.18, "square");
 }
 
-// This plays when the scoreboard is reset.
 function playResetSound() {
   playBeepSound(300, 0.12, "square");
 
-  setTimeout(function () {
+  window.setTimeout(function () {
     playBeepSound(180, 0.18, "square");
   }, 110);
 }
 
-// This vibrates the device if the browser supports vibration.
 function vibrateDevice(pattern) {
   if (navigator.vibrate) {
     navigator.vibrate(pattern);
   }
 }
+
+gameGrid.addEventListener("click", function (event) {
+  const playButton = event.target.closest("[data-play-id]");
+
+  if (playButton) {
+    launchGame(playButton.dataset.playId);
+  }
+});
 
 addCoinsBtn.addEventListener("click", addCoins);
 resetScoresBtn.addEventListener("click", resetArcade);
