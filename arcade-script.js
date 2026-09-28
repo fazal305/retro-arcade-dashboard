@@ -10,14 +10,70 @@ let coins = 3;
 let scoreboard = [];
 
 const gameList = [
-  { id: "game1", title: "VOID RUNNER", genre: "SHOOTER", color: "#00f7ff", highScore: 0, pixelIcon: "VR" },
-  { id: "game2", title: "PIXEL SLAYER", genre: "FIGHTER", color: "#ff2bd6", highScore: 0, pixelIcon: "PS" },
-  { id: "game3", title: "BLOCK BUSTER 99", genre: "PUZZLE", color: "#ffe600", highScore: 0, pixelIcon: "BB" },
-  { id: "game4", title: "GHOST HIGHWAY", genre: "RACER", color: "#ff8c00", highScore: 0, pixelIcon: "GH" },
-  { id: "game5", title: "NEON STRIKER", genre: "SPORTS", color: "#00ff88", highScore: 0, pixelIcon: "NS" },
-  { id: "game6", title: "LASER DUNGEON", genre: "RPG", color: "#9b5cff", highScore: 0, pixelIcon: "LD" },
-  { id: "game7", title: "TURBO FIST", genre: "FIGHTER", color: "#ff1f4f", highScore: 0, pixelIcon: "TF" },
-  { id: "game8", title: "STAR WRAITH", genre: "SHOOTER", color: "#2979ff", highScore: 0, pixelIcon: "SW" }
+  {
+    id: "game1",
+    title: "VOID RUNNER",
+    genre: "SHOOTER",
+    color: "#00f7ff",
+    highScore: 0,
+    pixelIcon: "VR",
+  },
+  {
+    id: "game2",
+    title: "PIXEL SLAYER",
+    genre: "FIGHTER",
+    color: "#ff2bd6",
+    highScore: 0,
+    pixelIcon: "PS",
+  },
+  {
+    id: "game3",
+    title: "BLOCK BUSTER 99",
+    genre: "PUZZLE",
+    color: "#ffe600",
+    highScore: 0,
+    pixelIcon: "BB",
+  },
+  {
+    id: "game4",
+    title: "GHOST HIGHWAY",
+    genre: "RACER",
+    color: "#ff8c00",
+    highScore: 0,
+    pixelIcon: "GH",
+  },
+  {
+    id: "game5",
+    title: "NEON STRIKER",
+    genre: "SPORTS",
+    color: "#00ff88",
+    highScore: 0,
+    pixelIcon: "NS",
+  },
+  {
+    id: "game6",
+    title: "LASER DUNGEON",
+    genre: "RPG",
+    color: "#9b5cff",
+    highScore: 0,
+    pixelIcon: "LD",
+  },
+  {
+    id: "game7",
+    title: "TURBO FIST",
+    genre: "FIGHTER",
+    color: "#ff1f4f",
+    highScore: 0,
+    pixelIcon: "TF",
+  },
+  {
+    id: "game8",
+    title: "STAR WRAITH",
+    genre: "SHOOTER",
+    color: "#2979ff",
+    highScore: 0,
+    pixelIcon: "SW",
+  },
 ];
 
 function renderGameGrid() {
@@ -145,7 +201,7 @@ function addScore(playerInitials, gameName, score) {
   scoreboard.push({
     playerInitials: playerInitials,
     gameName: gameName,
-    score: score
+    score: score,
   });
 
   scoreboard.sort(function (firstScore, secondScore) {
@@ -231,9 +287,7 @@ function updateCoinDisplay() {
 }
 
 function updateMarquee() {
-  const topScore = scoreboard.length > 0
-    ? scoreboard[0].score
-    : "00000";
+  const topScore = scoreboard.length > 0 ? scoreboard[0].score : "00000";
 
   marqueeText.textContent = `
     INSERT COIN / PRESS START / HIGH SCORE: ${topScore} /
@@ -273,20 +327,17 @@ function saveArcadeData() {
   const savedGameScores = gameList.map(function (game) {
     return {
       id: game.id,
-      highScore: game.highScore
+      highScore: game.highScore,
     };
   });
 
   const arcadeData = {
     coins: coins,
     scoreboard: scoreboard,
-    gameScores: savedGameScores
+    gameScores: savedGameScores,
   };
 
-  localStorage.setItem(
-    "retroArcadeData",
-    JSON.stringify(arcadeData)
-  );
+  localStorage.setItem("retroArcadeData", JSON.stringify(arcadeData));
 }
 
 function loadArcadeData() {
@@ -319,20 +370,9 @@ function loadArcadeData() {
 }
 
 function getRandomInitials() {
-  const initials = [
-    "FAZ",
-    "CPU",
-    "NPC",
-    "RDX",
-    "LOL",
-    "AAA",
-    "KHI",
-    "DEV"
-  ];
+  const initials = ["FAZ", "CPU", "NPC", "RDX", "LOL", "AAA", "KHI", "DEV"];
 
-  const randomIndex = Math.floor(
-    Math.random() * initials.length
-  );
+  const randomIndex = Math.floor(Math.random() * initials.length);
 
   return initials[randomIndex];
 }
@@ -348,7 +388,7 @@ function playBeepSound(frequency, duration, type) {
   gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
   gainNode.gain.exponentialRampToValueAtTime(
     0.001,
-    audioContext.currentTime + duration
+    audioContext.currentTime + duration,
   );
 
   oscillator.connect(gainNode);
