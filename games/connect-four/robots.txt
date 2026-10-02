@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://connect-four-fz17.vercel.app/sitemap.xml
