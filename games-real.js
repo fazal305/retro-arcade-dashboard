@@ -5,7 +5,18 @@
  * in player.html inside an iframe, with the dashboard's own chrome wrapped
  * around it.
  */
-const realGames = [];
+const realGames = [
+  {
+    slug: "zombie-survival-choice-game",
+    title: "Zombie Survival Choice Game",
+    genre: "RPG",
+    color: "#39ff14",
+    icon: "ZS",
+    description:
+      "A dark text-based zombie survival RPG built with HTML, CSS, and vanilla JavaScript.",
+    repo: "zombie-survival-choice-game",
+  },
+];
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = realGames;
