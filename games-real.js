@@ -26,6 +26,16 @@ const realGames = [
       "A configurable Connect Four game with a Minimax + Alpha-Beta AI opponent.",
     repo: "connect-four",
   },
+  {
+    slug: "tetris-react",
+    title: "Tetris (React)",
+    genre: "PUZZLE",
+    color: "#00f7ff",
+    icon: "TR",
+    description:
+      "A polished, offline-first Tetris built with React: 7-bag randomizer, SRS rotation, hold/ghost pieces, and a smooth game loop.",
+    repo: "tetris-react",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
