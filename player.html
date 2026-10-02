@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Cabinet... | Retro Arcade Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <meta name="robots" content="noindex" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="arcade-styles.css" />
+    <link rel="stylesheet" href="player-styles.css" />
+  </head>
+  <body class="player-body">
+    <div class="scanlines"></div>
+
+    <header class="player-bar">
+      <a class="back-btn" href="index.html">&larr; Back to Dashboard</a>
+
+      <div class="player-heading">
+        <h1 id="playerTitle">Loading Cabinet...</h1>
+        <p id="playerGenre" class="player-genre"></p>
+      </div>
+
+      <a id="repoLink" class="repo-link" href="#" target="_blank" rel="noopener">
+        Source
+      </a>
+    </header>
+
+    <p id="playerDescription" class="player-description"></p>
+
+    <main class="player-frame-shell">
+      <iframe
+        id="gameFrame"
+        class="player-frame"
+        title="Game cabinet"
+        allow="autoplay; fullscreen; vibrate"
+      ></iframe>
+    </main>
+
+    <script src="games-real.js"></script>
+    <script src="player-script.js"></script>
+  </body>
+</html>
