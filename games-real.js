@@ -46,6 +46,16 @@ const realGames = [
       "A local pass-and-play social deduction word game for one device and a group of players.",
     repo: "imposter-word-game",
   },
+  {
+    slug: "boss-fight-button-masher",
+    title: "Boss Fight: Button Masher",
+    genre: "ACTION",
+    color: "#ff1f4f",
+    icon: "BF",
+    description:
+      "A retro button masher boss fight game with timed attacks, power-ups, HP bars, and local best-run tracking.",
+    repo: "boss-fight-button-masher",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
