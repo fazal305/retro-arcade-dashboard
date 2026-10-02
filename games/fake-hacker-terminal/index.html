@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Cinematic fake hacker terminal built with HTML CSS and Vanilla JavaScript"
+    />
+    <title>Fake Hacker Terminal</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+    <link rel="canonical" href="https://fazal305.github.io/fake-hacker-terminal/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fazal305.github.io/fake-hacker-terminal/" />
+    <meta property="og:title" content="Fake Hacker Terminal" />
+    <meta
+      property="og:description"
+      content="Cinematic fake hacker terminal built with HTML CSS and Vanilla JavaScript"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fake Hacker Terminal" />
+    <meta
+      name="twitter:description"
+      content="Cinematic fake hacker terminal built with HTML CSS and Vanilla JavaScript"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="hacker-styles.css" />
+  </head>
+  <body>
+    <main class="terminal-window" aria-labelledby="terminalTitle">
+      <header class="terminal-header">
+        <div class="window-buttons" aria-hidden="true">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+
+        <h1 id="terminalTitle" class="terminal-title">demo@fazal-labs: ~</h1>
+      </header>
+
+      <section
+        class="terminal-body"
+        id="terminalBody"
+        aria-label="Simulated terminal output"
+        aria-live="polite"
+      >
+        <button class="sound-btn" id="soundBtn" type="button">
+          Enable Audio
+        </button>
+      </section>
+    </main>
+
+    <script src="hacker-script.js"></script>
+  </body>
+</html>
