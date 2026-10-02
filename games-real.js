@@ -56,6 +56,16 @@ const realGames = [
       "A retro button masher boss fight game with timed attacks, power-ups, HP bars, and local best-run tracking.",
     repo: "boss-fight-button-masher",
   },
+  {
+    slug: "reaction-speed-tester",
+    title: "Reaction Speed Tester",
+    genre: "ARCADE",
+    color: "#00ff88",
+    icon: "RS",
+    description:
+      "Fullscreen reaction speed tester with neon visuals, sound effects, vibration feedback, and real millisecond timing.",
+    repo: "reaction-speed-tester",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {

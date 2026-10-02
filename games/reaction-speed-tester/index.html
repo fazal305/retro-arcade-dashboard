@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Fullscreen reaction speed tester game with neon visuals, sound effects, vibration feedback, score tracking, and real millisecond timing using Vanilla JavaScript."
+    />
+    <title>Reaction Speed Tester — Test Your Reflexes Online</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="canonical" href="https://fazal305.github.io/reaction-speed-tester/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fazal305.github.io/reaction-speed-tester/" />
+    <meta property="og:title" content="Reaction Speed Tester — Test Your Reflexes Online" />
+    <meta
+      property="og:description"
+      content="Fullscreen reaction speed tester game with neon visuals, sound effects, vibration feedback, score tracking, and real millisecond timing using Vanilla JavaScript."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Reaction Speed Tester — Test Your Reflexes Online" />
+    <meta
+      name="twitter:description"
+      content="Fullscreen reaction speed tester game with neon visuals, sound effects, vibration feedback, score tracking, and real millisecond timing using Vanilla JavaScript."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main
+      id="gameScreen"
+      class="game-screen waiting"
+      tabindex="0"
+      aria-labelledby="gameTitle"
+      aria-describedby="gameMessage"
+    >
+      <section class="game-box">
+        <p class="eyebrow">Reaction Speed Tester</p>
+
+        <h1 id="gameTitle" class="game-title">Get Ready...</h1>
+
+        <p
+          id="gameMessage"
+          class="game-message"
+          role="status"
+          aria-live="polite"
+        >
+          Click start, wait for the flash, then tap or press Space as fast as
+          possible.
+        </p>
+
+        <button id="startBtn" class="main-btn" type="button">Start Game</button>
+
+        <section class="stats-panel" aria-label="Game stats">
+          <article class="stat-card">
+            <h2>Personal Best</h2>
+
+            <p id="bestScore">No attempts yet</p>
+
+            <button id="resetBestBtn" class="reset-btn" type="button">
+              Reset Best
+            </button>
+          </article>
+
+          <article class="stat-card">
+            <h2>Last 5 Attempts</h2>
+
+            <ul id="historyList" class="history-list">
+              <li>No attempts yet</li>
+            </ul>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
