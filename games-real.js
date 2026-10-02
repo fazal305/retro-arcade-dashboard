@@ -86,6 +86,16 @@ const realGames = [
       "A chaotic dark-mode coding roast generator built with HTML, CSS, and vanilla JavaScript.",
     repo: "roast-me-generator",
   },
+  {
+    slug: "fake-hacker-terminal",
+    title: "Fake Hacker Terminal",
+    genre: "SIM",
+    color: "#2979ff",
+    icon: "HT",
+    description:
+      "Cinematic fake hacker terminal built with HTML, CSS, and vanilla JavaScript.",
+    repo: "fake-hacker-terminal",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
