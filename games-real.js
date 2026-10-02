@@ -76,6 +76,16 @@ const realGames = [
       "Chaotic late-night decision generator built with HTML, CSS, and vanilla JavaScript.",
     repo: "should-i-do-it",
   },
+  {
+    slug: "roast-me-generator",
+    title: "Roast Me Generator",
+    genre: "COMEDY",
+    color: "#ff8c00",
+    icon: "RM",
+    description:
+      "A chaotic dark-mode coding roast generator built with HTML, CSS, and vanilla JavaScript.",
+    repo: "roast-me-generator",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {

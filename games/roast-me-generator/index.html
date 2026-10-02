@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A chaotic dark-mode coding roast generator built with HTML, CSS, and vanilla JavaScript."
+    />
+    <title>Roast Me Generator — Chaotic Dark-Mode Coding Roasts</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="canonical" href="https://fazal305.github.io/roast-me-generator/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fazal305.github.io/roast-me-generator/" />
+    <meta property="og:title" content="Roast Me Generator — Chaotic Dark-Mode Coding Roasts" />
+    <meta
+      property="og:description"
+      content="A chaotic dark-mode coding roast generator built with HTML, CSS, and vanilla JavaScript."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Roast Me Generator — Chaotic Dark-Mode Coding Roasts" />
+    <meta
+      name="twitter:description"
+      content="A chaotic dark-mode coding roast generator built with HTML, CSS, and vanilla JavaScript."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero" aria-labelledby="pageTitle">
+        <p class="eyebrow">Dev Roast Battle</p>
+
+        <h1 id="pageTitle">Roast Me Generator</h1>
+
+        <p class="description">
+          Type your coding personality, language, tool, or experience level.
+          Then let the app roast you lightly.
+        </p>
+      </section>
+
+      <section class="roast-card" aria-labelledby="roastTitle">
+        <h2 id="roastTitle" class="sr-only">Coding roast generator</h2>
+
+        <label for="userInput">Tell me about your coding life</label>
+
+        <div class="input-row">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Example: I use CSS and GitHub"
+            autocomplete="off"
+          />
+
+          <button id="roastBtn" type="button">Roast Me</button>
+        </div>
+
+        <div class="actions-row">
+          <button id="clearBtn" class="small-btn" type="button">Clear</button>
+
+          <p id="categoryLabel" class="category-label">
+            Waiting for roast material...
+          </p>
+        </div>
+
+        <div class="roast-output-box">
+          <p id="roastOutput" role="status" aria-live="polite">
+            Your roast will appear here.
+          </p>
+        </div>
+
+        <div class="result-actions">
+          <button id="againBtn" class="again-btn" type="button">
+            Roast Again
+          </button>
+
+          <button id="copyBtn" class="copy-btn" type="button">
+            Copy Roast
+          </button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Built with HTML, CSS, and JavaScript. Roast responsibly.
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
