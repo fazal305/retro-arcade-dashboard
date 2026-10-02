@@ -457,6 +457,26 @@ button:focus-visible {
   }
 }
 
+.real-games-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 2px dashed var(--border);
+}
+
+.real-game-description {
+  min-height: 4.2rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.real-play-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
 @media (min-width: 700px) {
   .hero-section {
     grid-template-columns: 1fr 270px;
@@ -480,6 +500,10 @@ button:focus-visible {
   .scoreboard-panel {
     position: sticky;
     top: 1rem;
+  }
+
+  .real-game-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
