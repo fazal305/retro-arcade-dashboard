@@ -16,6 +16,16 @@ const realGames = [
       "A dark text-based zombie survival RPG built with HTML, CSS, and vanilla JavaScript.",
     repo: "zombie-survival-choice-game",
   },
+  {
+    slug: "connect-four",
+    title: "Connect Four",
+    genre: "STRATEGY",
+    color: "#ffcc00",
+    icon: "C4",
+    description:
+      "A configurable Connect Four game with a Minimax + Alpha-Beta AI opponent.",
+    repo: "connect-four",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
