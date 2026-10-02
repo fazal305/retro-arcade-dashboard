@@ -66,6 +66,16 @@ const realGames = [
       "Fullscreen reaction speed tester with neon visuals, sound effects, vibration feedback, and real millisecond timing.",
     repo: "reaction-speed-tester",
   },
+  {
+    slug: "should-i-do-it",
+    title: "Should I Do It?",
+    genre: "ORACLE",
+    color: "#9b5cff",
+    icon: "SD",
+    description:
+      "Chaotic late-night decision generator built with HTML, CSS, and vanilla JavaScript.",
+    repo: "should-i-do-it",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {

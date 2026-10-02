@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Chaotic late-night decision generator built with HTML, CSS, and vanilla JavaScript."
+  />
+  <title>Should I Do It? — Chaotic Late-Night Decision Generator</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://fazal305.github.io/should-i-do-it/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fazal305.github.io/should-i-do-it/" />
+  <meta property="og:title" content="Should I Do It? — Chaotic Late-Night Decision Generator" />
+  <meta
+    property="og:description"
+    content="Chaotic late-night decision generator built with HTML, CSS, and vanilla JavaScript."
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Should I Do It? — Chaotic Late-Night Decision Generator" />
+  <meta
+    name="twitter:description"
+    content="Chaotic late-night decision generator built with HTML, CSS, and vanilla JavaScript."
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero" aria-labelledby="pageTitle">
+      <p class="tagline">Late night decision energy</p>
+
+      <h1 id="pageTitle">Should I Do It?</h1>
+
+      <p class="description">
+        Type your question and let the universe give you a very questionable answer.
+      </p>
+    </section>
+
+    <section class="decision-card" aria-labelledby="decisionTitle">
+      <h2 id="decisionTitle" class="sr-only">Decision generator</h2>
+
+      <label for="questionInput">Ask your question</label>
+
+      <input
+        type="text"
+        id="questionInput"
+        placeholder="Should I order biryani at 2 AM?"
+        autocomplete="off"
+      />
+
+      <button id="decideBtn" type="button">
+        Decide My Fate
+      </button>
+
+      <div id="resultBox" class="result-box" role="status" aria-live="polite">
+        Your answer will appear here...
+      </div>
+
+      <div class="action-buttons">
+        <button id="askAgainBtn" class="secondary-btn" type="button">
+          Ask Again
+        </button>
+
+        <a
+          id="whatsappShareBtn"
+          class="secondary-btn"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Share on WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section class="history-section" aria-labelledby="historyTitle">
+      <h2 id="historyTitle">Recent Decisions</h2>
+
+      <ul id="historyList">
+        <li class="empty-history">No decisions yet.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
