@@ -32,7 +32,7 @@ The project is front-end only and works without a build step or external framewo
 - Scrolling arcade marquee
 - Responsive dashboard layout
 
-## Included Games
+## Included Games (Simulated Cabinets)
 
 | Game            | Genre   |
 | --------------- | ------- |
@@ -45,13 +45,43 @@ The project is front-end only and works without a build step or external framewo
 | TURBO FIST      | FIGHTER |
 | STAR WRAITH     | SHOOTER |
 
+These eight cabinets are simulated: clicking Play spends a coin and
+generates a random score. They are part of the original dashboard concept.
+
+## Real Arcade Cabinets (Folded-In Games)
+
+Nine fully playable games, each originally its own standalone repo, are
+folded into this dashboard and served as self-contained static bundles
+under `games/<slug>/`. They launch from the dashboard's "Real Arcade
+Cabinets" section via `player.html`, which wraps each game in the
+dashboard's own page chrome (a back-to-dashboard bar) and loads it in an
+iframe.
+
+| Game                         | Genre    | Source Repo                                                                             |
+| ---------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| Zombie Survival Choice Game  | RPG      | [zombie-survival-choice-game](https://github.com/fazal305/zombie-survival-choice-game)   |
+| Connect Four                 | STRATEGY | [connect-four](https://github.com/fazal305/connect-four)                                 |
+| Tetris (React)               | PUZZLE   | [tetris-react](https://github.com/fazal305/tetris-react)                                 |
+| Imposter                     | PARTY    | [imposter-word-game](https://github.com/fazal305/imposter-word-game)                     |
+| Boss Fight: Button Masher    | ACTION   | [boss-fight-button-masher](https://github.com/fazal305/boss-fight-button-masher)         |
+| Reaction Speed Tester        | ARCADE   | [reaction-speed-tester](https://github.com/fazal305/reaction-speed-tester)               |
+| Should I Do It?              | ORACLE   | [should-i-do-it](https://github.com/fazal305/should-i-do-it)                             |
+| Roast Me Generator           | COMEDY   | [roast-me-generator](https://github.com/fazal305/roast-me-generator)                     |
+| Fake Hacker Terminal         | SIM      | [fake-hacker-terminal](https://github.com/fazal305/fake-hacker-terminal)                 |
+
+Connect Four, Tetris (React), and Imposter are React + Vite apps; they are
+pre-built (`vite build --base=./`) into static bundles before being copied
+into `games/<slug>/`, so the dashboard itself stays build-step-free. The
+other six games were already plain HTML/CSS/JS and are copied in as-is.
+
 ## Controls
 
-| Action     | Result                                       |
-| ---------- | -------------------------------------------- |
-| Click Play | Spend one coin and generate a score          |
-| Add Coins  | Refill the coin count                        |
-| Reset      | Clear saved scores and reset all high scores |
+| Action                          | Result                                       |
+| -------------------------------- | -------------------------------------------- |
+| Click Play (simulated cabinet)   | Spend one coin and generate a score          |
+| Click Play (real cabinet)        | Launch the actual game in the player view    |
+| Add Coins                        | Refill the coin count                        |
+| Reset                             | Clear saved scores and reset all high scores |
 
 ## Built With
 
@@ -69,6 +99,21 @@ retro-arcade-dashboard/
 |-- index.html
 |-- arcade-styles.css
 |-- arcade-script.js
+|-- games-real.js            # Metadata for the 9 folded-in real games
+|-- real-games-script.js     # Renders the "Real Arcade Cabinets" cards
+|-- player.html               # Launches a real game inside dashboard chrome
+|-- player-script.js
+|-- player-styles.css
+|-- games/                    # One self-contained static bundle per real game
+|   |-- zombie-survival-choice-game/
+|   |-- connect-four/
+|   |-- tetris-react/
+|   |-- imposter-word-game/
+|   |-- boss-fight-button-masher/
+|   |-- reaction-speed-tester/
+|   |-- should-i-do-it/
+|   |-- roast-me-generator/
+|   |-- fake-hacker-terminal/
 |-- image.png
 |-- README.md
 |-- LICENSE
