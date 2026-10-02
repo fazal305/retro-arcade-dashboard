@@ -36,6 +36,16 @@ const realGames = [
       "A polished, offline-first Tetris built with React: 7-bag randomizer, SRS rotation, hold/ghost pieces, and a smooth game loop.",
     repo: "tetris-react",
   },
+  {
+    slug: "imposter-word-game",
+    title: "Imposter",
+    genre: "PARTY",
+    color: "#ff2bd6",
+    icon: "IM",
+    description:
+      "A local pass-and-play social deduction word game for one device and a group of players.",
+    repo: "imposter-word-game",
+  },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
