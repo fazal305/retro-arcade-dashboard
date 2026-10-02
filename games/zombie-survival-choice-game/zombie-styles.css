@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Creepster&family=Work+Sans:wght@400;600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(230, 57, 70, 0.18), transparent 35%),
+    linear-gradient(135deg, #050505, #0d0d0d);
+  color: #e8e8e8;
+  font-family: "Work Sans", sans-serif;
+}
+
+.game-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.game-card {
+  width: 100%;
+  max-width: 640px;
+  background: rgba(15, 15, 15, 0.96);
+  border: 1px solid rgba(230, 57, 70, 0.35);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 0 40px rgba(230, 57, 70, 0.16);
+  overflow: hidden;
+}
+
+.game-card.game-over {
+  background: linear-gradient(rgba(204, 0, 0, 0.16), rgba(15, 15, 15, 0.96));
+}
+
+.game-card.win {
+  background: linear-gradient(rgba(0, 170, 90, 0.16), rgba(15, 15, 15, 0.96));
+  border-color: rgba(0, 255, 120, 0.3);
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.stat-pill {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.game-label {
+  color: #8a8a8a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+}
+
+#sceneTitle {
+  color: #e63946;
+  font-family: "Creepster", cursive;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  line-height: 0.9;
+  margin-bottom: 18px;
+  animation: fadeIn 0.35s ease;
+}
+
+#sceneDescription {
+  color: #cfcfcf;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 28px;
+  animation: fadeIn 0.45s ease;
+}
+
+.choices-box {
+  display: grid;
+  gap: 12px;
+}
+
+.choice-btn,
+.restart-btn {
+  width: 100%;
+  background: #101010;
+  color: #ffffff;
+  border: 1px solid rgba(230, 57, 70, 0.7);
+  border-radius: 16px;
+  padding: 15px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.choice-btn:hover,
+.restart-btn:hover {
+  transform: translateY(-2px);
+  background: #181818;
+  box-shadow: 0 0 24px rgba(230, 57, 70, 0.3);
+}
+
+.choice-btn:focus-visible,
+.restart-btn:focus-visible {
+  outline: 3px solid rgba(230, 57, 70, 0.5);
+  outline-offset: 3px;
+}
+
+.choice-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.no-ammo-label {
+  display: block;
+  color: #ff8a8a;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.restart-btn {
+  background: #cc0000;
+  margin-top: 8px;
+}
+
+.game-card.win .restart-btn {
+  background: #008f4c;
+  border-color: rgba(0, 255, 120, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .game-page {
+    padding: 14px;
+  }
+
+  .game-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-pill {
+    font-size: 0.9rem;
+  }
+}
